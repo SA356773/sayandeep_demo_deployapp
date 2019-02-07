@@ -7,7 +7,7 @@ from flask import make_response
 
 app = Flask(__name__)
 
-@app.route('/demo',methods=['GET'])
+@app.route('/demo',methods=['POST'])
 def demo():
     req = request.get_json(silent=True, force=True)
 
