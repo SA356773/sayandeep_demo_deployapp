@@ -31,7 +31,11 @@ def createResponse(req):
   paramters = result.get("parameters")
   animal = parameters.get("AnimalEntity")
   speech = 'Hello, this is sa demo joke on {}'.format(animal)
-  my_result =  
+  my_result = {
+        "speech": speech,
+        "displayText": speech,
+        "source": "apiai-weather-webhook-sample"
+  }
   res = json.dumps(my_result, indent=4)
   r = make_response(res)
   r.headers['Content-Type'] = 'application/json'
