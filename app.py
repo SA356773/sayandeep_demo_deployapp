@@ -31,42 +31,7 @@ def createResponse(req):
   paramters = result.get("parameters")
   animal = parameters.get("AnimalEntity")
   speech = 'Hello, this is sa demo joke on {}'.format(animal)
-  my_result =  {
-  "conversationToken": "[]",
-  "expectUserResponse": true,
-  "expectedInputs": [
-    {
-      "inputPrompt": {
-        "richInitialPrompt": {
-          "items": [
-            {
-              "simpleResponse": {
-                "textToSpeech": speech
-              }
-            }
-          ]
-        }
-      },
-      "possibleIntents": [
-        {
-          "intent": "assistant.intent.action.TEXT"
-        }
-      ],
-      "speechBiasingHints": [
-        "$AnimalEntity"
-      ]
-    }
-  ],
-  "responseMetadata": {
-    "status": {
-      "message": "Success (200)"
-    },
-    "queryMatchInfo": {
-      "queryMatched": true,
-      "intent": "b894ab2c-3e6f-4ad7-8860-5bc4c4e8727a"
-    }
-  }
-}
+  my_result =  
   res = json.dumps(my_result, indent=4)
   r = make_response(res)
   r.headers['Content-Type'] = 'application/json'
