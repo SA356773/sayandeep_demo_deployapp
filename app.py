@@ -9,7 +9,28 @@ app = Flask(__name__)
 
 @app.route('/demo',methods=['GET'])
 def demo():
-  speech = 'Hello World'
+    req = request.get_json(silent=True, force=True)
+
+    print("Request:")
+    # commented out by Naresh
+    print(json.dumps(req, indent=4))
+
+    res = createResponse(req)
+
+    res = json.dumps(res, indent=4)
+    # print(res)
+    r = make_response(res)
+    r.headers['Content-Type'] = 'application/json'
+    return r
+
+
+
+def createResponse(req):
+  if req.get("result").get("action") != "animal_info":
+        return {}
+  paramters = result.get("parameters")
+  animal = parameters.get("AnimalEntity")
+  speech = 'Hello, this is sa demo joke on {}'.format(animal)
   my_result =  {
         "speech": speech,
         "displayText": speech,
