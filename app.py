@@ -6,7 +6,7 @@ from flask import request
 from flask import make_response
 
 @app.route('/demo', methods=['GET'])
-def demo_reply():
+def demo():
   return 'Hello there my friend!!'
   
 
