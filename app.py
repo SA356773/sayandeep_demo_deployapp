@@ -37,8 +37,8 @@ def createResponse(req):
   return r
   
 if __name__ == '__main__':
-    port = int(os.getenv('PORT', 5000))
+    port = int(os.getenv('PORT', 8080))
 
     print("Starting app on port %d" % port)
 
-    app.run(debug=True, port=port, host='0.0.0.0')
+    app.run(debug=True, port=port, host='127.0.0.0')
