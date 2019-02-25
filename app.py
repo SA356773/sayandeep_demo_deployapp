@@ -12,7 +12,6 @@ def webhook():
     req = request.get_json(silent=True, force=True)
 
     print("Request:")
-    # commented out by Naresh
     print(json.dumps(req, indent=4))
 
     res = createResponse(req)
@@ -21,15 +20,16 @@ def webhook():
 
 
 def createResponse(req):
-  if req.get("result").get("action") != "animal_info":
-        return {}
-  paramters = result.get("parameters")
+  result = req.get("queryResult")
+  if result.get("action") != "animal_info":
+        return{}
+  parameters = result.get("parameters")
   animal = parameters.get("AnimalEntity")
-  speech = 'Hello, this is sa demo joke on {}'.format(animal)
+  speech = 'Hello,received response from the backend application, this is a demo joke on {}'.format(animal)
+  print ("Voice output : "+speech)
   my_result = {
-        "speech": speech,
-        "displayText": speech,
-        "source": "apiai-weather-webhook-sample"
+	 "fulfillmentText": speech,
+     "source": "Demo-DialogFlow-Example"
   }
   res = json.dumps(my_result, indent=4)
   r = make_response(res)
@@ -37,8 +37,8 @@ def createResponse(req):
   return r
   
 if __name__ == '__main__':
-    port = int(os.getenv('PORT', 8080))
+    port = int(os.getenv('PORT', 5000))
 
     print("Starting app on port %d" % port)
 
-    app.run(debug=True, port=port, host='sayandeep-demo-app.herokuapp.com')
+    app.run(debug=False, port=port, host='127.0.0.1', threaded=True)
