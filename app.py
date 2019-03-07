@@ -13,7 +13,6 @@ def webhook():
 
     print("Request:")
     print(json.dumps(req, indent=4))
-
     res = createResponse(req)
     return res
 
@@ -21,6 +20,17 @@ def webhook():
 
 def createResponse(req):
   result = req.get("queryResult")
+  if result.get("action") == "input.unknown":
+        print ("Failed to recognize!!..passing to the next engine")
+        my_result = {
+        "fulfillmentText": "Fallback intent",
+        "source": "Demo-DialogFlow-Example"
+        }
+        res = json.dumps(my_result, indent=4)
+        r = make_response(res)
+        r.headers['Content-Type'] = 'application/json'
+        return r
+
   if result.get("action") != "animal_info":
         return{}
   parameters = result.get("parameters")
